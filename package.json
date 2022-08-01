@@ -31,7 +31,7 @@
     "inquirer-file-tree-selection-prompt": "^1.0.15",
     "js-yaml": "^4.1.0",
     "json-schema-ref-parser": "^9.0.9",
-    "oas-devtools": "file:../oas-devtools",
+    "oas-devtools": "^0.1.0",
     "rxjs": "^7.5.6",
     "validator": "^13.7.0"
   }
