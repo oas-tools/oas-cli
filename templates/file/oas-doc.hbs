@@ -1,0 +1,158 @@
+openapi: {{version}}
+info:
+  version: 1.0.0
+  title: {{title}}
+  description: {{description}} 
+
+paths:
+  {{#each resource as |res|}}
+  {{#if (or (lookupProp ../operations res 'get') (lookupProp ../operations res 'post') false)}}
+  /api/v1/{{lookup ../resources @index}}:
+    {{#if (lookupProp ../operations res 'get')}}
+    get:
+      description: Returns all {{lookup ../resources @index}}
+      operationId: get{{lookup ../Resource @index}}
+      responses:
+        200:
+          description: {{lookup ../Resource @index}} list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/{{res}}'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    {{/if}}
+    {{#if (lookupProp ../operations res 'post')}}
+    post:
+      description: Creates a new {{res}}
+      operationId: add{{lookup ../Resource @index}}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/{{res}}'
+        description: {{lookup ../Resource @index}} to be created
+        required: true
+      responses:
+        201:
+          description: {{lookup ../Resource @index}}
+        default:
+            description: Unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/error'
+    {{/if}}
+  {{/if}}
+  {{#if (or (lookupProp ../operations res 'put') (lookupProp ../operations res 'delete') (lookupProp ../operations res 'get'))}}
+  /api/v1/{{lookup ../resources @index}}/{ {{~lookup ../id @index~}} }:
+    {{#if (lookupProp ../operations res 'get')}}
+    get:
+      description: Returns a single {{res}} by its {{lookup ../id @index}}
+      operationId: find{{lookup ../Resource @id}}By{{lookup ../id @index}}
+      parameters:
+        - required: true
+          name: {{lookup ../id @index}}
+          description: {{lookup ../id @index}} of the {{res}} to fetch
+          in: path
+          schema:
+            {{~#with ../resourceObj as |obj|}}{{#with (lookup ../../id @index) as |idProp|}}
+            type: {{lookupProp obj res idProp}}
+            {{~/with}}{{/with}}
+      responses:
+        200:
+          description: {{lookup ../Resource @index}} found by {{lookup ../id @index}}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/{{res}}'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    {{/if}}
+    {{#if (lookupProp ../operations res 'put')}}
+    put:
+      description: Update a {{res}} based on its {{lookup ../id @index}}
+      operationId: update{{lookup ../Resource @index}}
+      parameters:
+        - required: true
+          name: {{lookup ../id @index}}
+          description: {{lookup ../id @index}} of the {{res}} to update
+          in: path
+          schema:
+            {{~#with ../resourceObj as |obj|}}{{#with (lookup ../../id @index) as |idProp|}}
+            type: {{lookupProp obj res idProp}}
+            {{~/with}}{{/with}}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/{{res}}'
+        description: {{lookup ../Resource @index}} to be updated
+        required: true
+      responses:
+        '204':
+          description: {{lookup ../Resource @index}} updated
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    {{/if}}
+    {{#if (lookupProp ../operations res 'delete')}}
+    delete:
+      description: Deletes a single {{res}} based on its {{lookup ../id @index}}
+      operationId: delete{{lookup ../Resource @index}}
+      parameters:
+        - required: true
+          name: {{lookup ../id @index}}
+          description: {{lookup ../id @index}} of the {{res}} to delete
+          in: path
+          schema:
+            {{~#with ../resourceObj as |obj|}}{{#with (lookup ../../id @index) as |idProp|}}
+            type: {{lookupProp obj res idProp}}
+            {{~/with}}{{/with}}
+      responses:
+        '204':
+          description: {{lookup ../Resource @index}} deleted
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    {{/if}}
+  {{/if}}
+  {{/each}}
+
+components:
+  schemas:
+    {{#each resource}}
+    {{this}}:
+        type: object
+        required:
+          - {{lookup ../id @index}}
+        properties:
+        {{#each (lookup ../resourceObj this) as |type|}}
+          {{@key}}:
+            type: {{type}}
+        {{/each}}
+    {{/each}}
+    error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+      additionalProperties: true

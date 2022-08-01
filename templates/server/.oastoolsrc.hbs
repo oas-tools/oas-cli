@@ -1,0 +1,19 @@
+{
+    "packageJSON": "package.json",
+    "oasFile": "{{options.oasFilePath}}",
+    "useAnnotations": false,
+    "logger": {
+        "customLogger": null,
+        "level": "info",
+        "logFile": false,
+        "logFilePath": "./logs/oas-tools.log"
+
+    },
+    "middleware": { 
+        "router": { "disable": false, "controllers": "./controllers" },
+        "validator": { "requestValidation": true, "responseValidation": true, "strict": false },
+        "security": { "disable": {{#if oasFile.components.securitySchemes}}false{{else}}true{{/if}}, "auth": null },
+        "swagger": { "disable": false, "path": "/docs", "ui": { "customCss": null, "customJs": null } },
+        "error": { "disable": false, "printStackTrace": false, "customHandler": null }
+    }
+}

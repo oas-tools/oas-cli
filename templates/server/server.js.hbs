@@ -1,0 +1,56 @@
+{{#if options.esm}}
+import http from "http";
+import express from "express";
+import { initialize{{#if options.installModule}}, use{{/if}} } from "oas-tools";
+{{#if options.installModule}}import {{options.installModule.moduleName}} from '{{options.installModule.importName}}';{{/if}}
+
+{{else}}
+var http = require('http');
+var express = require("express");
+const { initialize{{#if options.installModule}}, use{{/if}} } = require('oas-tools');
+{{#if options.installModule}}const {{options.installModule.moduleName}} = require('{{options.installModule.importName}}');{{/if}}
+
+{{/if}}
+const deploy = async () => {
+    const serverPort = {{#if options.port}}{{options.port}}{{else}}8080{{/if}};
+    const app = express();
+    app.use(express.json({limit: '50mb'}));
+
+    const config = {
+        middleware: {
+            security: {
+                auth: {
+                    {{#each oasFile.components.securitySchemes}}
+                    {{@key}}: () => { /* no-op */ },
+                    {{/each}}
+                }
+            }
+        }
+    }
+
+    {{#if options.installModule}}use({{options.installModule.moduleName}}){{/if}}
+    initialize(app, config).then(() => {
+        http.createServer(app).listen(serverPort, () => {
+        console.log("\nApp running at http://localhost:" + serverPort);
+        console.log("________________________________________________________________");
+        if (config.middleware.swagger?.disable !== false) {
+            console.log('API docs (Swagger UI) available on http://localhost:' + serverPort + '/docs');
+            console.log("________________________________________________________________");
+        }
+        });
+    });
+}
+
+const undeploy = () => {
+  process.exit();
+};
+
+{{#if options.esm}}
+export default {deploy, undeploy}
+
+{{else}}
+module.exports = {
+    deploy: deploy,
+    undeploy: undeploy
+}
+{{/if}}

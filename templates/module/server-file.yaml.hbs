@@ -1,0 +1,82 @@
+openapi: 3.0.0
+info:
+  version: 0.1.0
+  title: Data Service
+
+paths:
+  /api/v1/test-{{name}}:
+    get:
+      x-router-controller: {{moduleName}}Controller
+      operationId: getRequest
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/placeholderModel'
+    post:
+      x-router-controller: {{moduleName}}Controller
+      operationId: postRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/placeholderModel'
+      responses:
+        201:
+          description: Success
+          
+  '/api/v1/test-{{name}}/{id}':
+    get:
+      x-router-controller: {{moduleName}}Controller
+      operationId: findRequest
+      parameters:
+        - required: true
+          name: id
+          in: path
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/placeholderModel'
+    put:
+      x-router-controller: {{moduleName}}Controller
+      operationId: putRequest
+      parameters:
+        - required: true
+          name: id
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/placeholderModel'
+      responses:
+        '204':
+          description: Success
+    delete:
+      x-router-controller: {{moduleName}}Controller
+      operationId: deleteRequest
+      parameters:
+        - required: true
+          name: id
+          in: path
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Success
+components:
+  schemas:
+    placeholderModel:
+      type: object
+      additionalProperties: true
