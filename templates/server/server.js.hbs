@@ -1,13 +1,13 @@
 {{#if options.esm}}
 import http from "http";
 import express from "express";
-import { initialize{{#if options.installModule}}, use{{/if}} } from "oas-tools";
+import { initialize{{#if options.installModule}}, use{{/if}} } from "@oas-tools/core";
 {{#if options.installModule}}import {{options.installModule.moduleName}} from '{{options.installModule.importName}}';{{/if}}
 
 {{else}}
 var http = require('http');
 var express = require("express");
-const { initialize{{#if options.installModule}}, use{{/if}} } = require('oas-tools');
+const { initialize{{#if options.installModule}}, use{{/if}} } = require('@oas-tools/core');
 {{#if options.installModule}}const {{options.installModule.moduleName}} = require('{{options.installModule.importName}}');{{/if}}
 
 {{/if}}

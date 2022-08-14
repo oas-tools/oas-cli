@@ -1,9 +1,9 @@
 import {initPrompt} from '../lib/initPrompt.js'
+import { validateOASFile } from "@oas-tools/commons";
 import { generateDevEnv } from '../lib/serverdevGenerator.js';
 import { generateModule } from "../lib/moduleGenerator.js";
 import { generateServer } from "../lib/serverGenerator.js";
 import { generateFile } from '../lib/oasFileGenerator.js';
-import {validateOASFile} from "oas-devtools/utils";
 import { parseObject, parseArray } from '../utils/commons.js';
 import {program} from "commander";
 
