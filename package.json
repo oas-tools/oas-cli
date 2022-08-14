@@ -33,5 +33,6 @@
     "json-schema-ref-parser": "^9.0.9",
     "rxjs": "^7.5.6",
     "validator": "^13.7.0"
-  }
+  },
+  "version": "1.0.0"
 }
