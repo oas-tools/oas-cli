@@ -1,0 +1,19 @@
+{{#if options.esm}}
+{{#if controllerFirstLoad}}
+import * as service from '../services/{{serviceName}}.js';
+
+{{/if}}
+export function {{opId}}(req, res) {
+    service.{{opId}}(req, res);
+}
+
+{{else}}
+{{#if controllerFirstLoad}}
+const service = require('../services/{{serviceName}}.js');
+
+{{/if}}
+module.exports.{{opId}} = function {{opId}}(req, res) {
+    service.{{opId}}(req, res);
+}
+
+{{/if}}

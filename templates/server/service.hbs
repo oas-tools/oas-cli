@@ -1,0 +1,15 @@
+{{#if options.esm}}
+export function {{opId}}(req, res) {
+    res.send({
+        message: 'This is the mockup controller for {{opId}}'
+    });
+}
+
+{{else}}
+module.exports.{{opId}} = function {{opId}}(req, res) {
+    res.send({
+        message: 'This is the mockup controller for {{opId}}'
+    });
+}
+
+{{/if}}

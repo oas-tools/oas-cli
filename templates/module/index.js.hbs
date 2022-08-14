@@ -1,0 +1,33 @@
+{{#if options.esm}}
+import { OASBase } from "@oas-tools/commons"
+
+export default class {{moduleName}} extends OASBase {
+    constructor(oasDoc, middleware) {
+        super(oasDoc, middleware);
+    }
+
+    static initialize(oasDoc, config) {
+        return new {{moduleName}}(oasDoc, (req, res, next) => {
+            // TODO your middleware code
+            next();
+        })
+    }
+
+}
+
+{{else}}
+const { OASBase } = require("@oas-tools/commons");
+
+module.exports = class {{moduleName}} extends OASBase {
+    constructor(oasDoc, middleware) {
+        super(oasDoc, middleware);
+    }
+
+    static initialize(oasDoc, config) {
+        return new {{moduleName}}(oasDoc, (req, res, next) => {
+            // TODO your middleware code
+            next();
+        })
+    }
+}
+{{/if}}

@@ -1,0 +1,16 @@
+{
+    "name": "{{name}}",
+    "version": "v1.0.0",
+    "description": "No description provided",
+    "license": "UNLICENSED",
+    {{#if options.esm}}"type": "module",{{/if}}
+    "private": false,
+    "main": "index.js",
+    "scripts": {
+        "prestart": "npm install --only=prod",
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "@oas-tools/commons": "^1.0.0"
+    }
+}

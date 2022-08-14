@@ -1,0 +1,37 @@
+{
+  "name": "@oas-tools/cli",
+  "description": "Comand line interface for OAS-Tools project",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "bin": {
+    "oas-tools": "./bin/oastools.js",
+    "oas-cli": "./bin/oastools.js",
+    "oas-generator": "./bin/oastools.js init server"
+  },
+  "keywords": [
+    "cli",
+    "oas-tools",
+    "openapi",
+    "oas",
+    "oas-wizard",
+    "oas-generator"
+  ],
+  "author": "ISA Group, University of Seville",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@oas-tools/commons": "^1.0.0",
+    "archiver": "^5.3.1",
+    "commander": "^9.4.0",
+    "handlebars": "^4.7.7",
+    "inquirer": "^8.2.0",
+    "inquirer-file-tree-selection-prompt": "^1.0.15",
+    "js-yaml": "^4.1.0",
+    "json-schema-ref-parser": "^9.0.9",
+    "rxjs": "^7.5.6",
+    "validator": "^13.7.0"
+  }
+}
