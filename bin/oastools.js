@@ -1,3 +1,5 @@
+#!/usr/bin/env node 
+
 import {initPrompt} from '../lib/initPrompt.js'
 import { validateOASFile } from "@oas-tools/commons";
 import { generateDevEnv } from '../lib/serverdevGenerator.js';
