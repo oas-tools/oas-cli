@@ -1,3 +1,13 @@
+## [1.0.2](https://github.com/oas-tools/oas-cli/compare/v1.0.1...v1.0.2) (2022-09-15)
+
+
+### Bug Fixes
+
+* Array declared as objects in generated OASdoc ([518af30](https://github.com/oas-tools/oas-cli/commit/518af30eb95f9f6f82bde9d340da279d3628c6ee))
+* MODULE NOT FOUND in server with Dockerfile ([5dd0c94](https://github.com/oas-tools/oas-cli/commit/5dd0c94e75b715937ec7c2e602eec1e8e732fc3a))
+
+
+
 ## [1.0.1](https://github.com/oas-tools/oas-cli/compare/v1.0.0...v1.0.1) (2022-08-15)
 
 
