@@ -146,6 +146,9 @@ components:
         {{#each (lookup ../resourceObj this) as |type|}}
           {{@key}}:
             type: {{type}}
+            {{#if (eq type 'array')}}
+            items: {}
+            {{/if}}
         {{/each}}
     {{/each}}
     error:
