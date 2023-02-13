@@ -1,3 +1,13 @@
+## [1.0.4](https://github.com/oas-tools/oas-cli/compare/v1.0.3...v1.0.4) (2023-02-13)
+
+
+### Bug Fixes
+
+* Consistent format ([99eca59](https://github.com/oas-tools/oas-cli/commit/99eca59f7ca9d8130e73ca0b1310a227e78a32e7)), closes [#12](https://github.com/oas-tools/oas-cli/issues/12) [#13](https://github.com/oas-tools/oas-cli/issues/13)
+* Incorrect double negation in template ([6e1e8cd](https://github.com/oas-tools/oas-cli/commit/6e1e8cdaf7c477caa572fd53968ca4d95b2760de)), closes [#11](https://github.com/oas-tools/oas-cli/issues/11)
+
+
+
 ## [1.0.3](https://github.com/oas-tools/oas-cli/compare/v1.0.2...v1.0.3) (2022-09-25)
 
 

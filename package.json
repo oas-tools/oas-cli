@@ -1,6 +1,6 @@
 {
   "name": "@oas-tools/cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Comand line interface for OAS-Tools project",
   "type": "module",
   "main": "index.js",
