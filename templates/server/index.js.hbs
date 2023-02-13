@@ -42,6 +42,7 @@ const app = express();
 app.use(express.json({limit: '50mb'}));
 
 const config = {
+    {{~#if oasFile.components.securitySchemes~}}
     middleware: {
         security: {
             auth: {
@@ -51,6 +52,7 @@ const config = {
             }
         }
     }
+    {{/if}}
 }
 
 {{#if options.installModule}}use({{options.installModule.moduleName}}){{/if}}
@@ -58,7 +60,7 @@ initialize(app, config).then(() => {
     http.createServer(app).listen(serverPort, () => {
     console.log("\nApp running at http://localhost:" + serverPort);
     console.log("________________________________________________________________");
-    if (config.middleware.swagger?.disable !== false) {
+    if (!config?.middleware?.swagger?.disable) {
         console.log('API docs (Swagger UI) available on http://localhost:' + serverPort + '/docs');
         console.log("________________________________________________________________");
     }
