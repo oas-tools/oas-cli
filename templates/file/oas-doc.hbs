@@ -11,7 +11,7 @@ paths:
     {{#if (lookupProp ../operations res 'get')}}
     get:
       description: Returns all {{lookup ../resources @index}}
-      operationId: get{{lookup ../Resource @index}}
+      operationId: get{{lookup ../Resources @index}}
       responses:
         200:
           description: {{lookup ../Resource @index}} list
@@ -100,7 +100,7 @@ paths:
         description: {{lookup ../Resource @index}} to be updated
         required: true
       responses:
-        '204':
+        204:
           description: {{lookup ../Resource @index}} updated
         default:
           description: Unexpected error
@@ -123,7 +123,7 @@ paths:
             type: {{lookupProp obj res idProp}}
             {{~/with}}{{/with}}
       responses:
-        '204':
+        204:
           description: {{lookup ../Resource @index}} deleted
         default:
           description: Unexpected error
